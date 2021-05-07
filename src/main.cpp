@@ -11,7 +11,6 @@
 void signalHandler(int signum)
 {
     eeros::safety::SafetySystem::exitHandler();
-    eeros::sequencer::Sequencer::instance().abort();
 }
 
 int main(int argc, char **argv)
