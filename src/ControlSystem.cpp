@@ -4,7 +4,7 @@ ControlSystem::ControlSystem(double dt)
     : E1("enc1"), E2("enc2"),
       scale1(21.3 / M_PI),
       qdMax1(21.3),
-      i1(33),
+      i1(3441.0 / 104.0),
       kM1(8.44e-3),
       M1("motor1"),
       timedomain("Main time domain", dt, true)
