@@ -13,13 +13,13 @@ ControlSystem::ControlSystem(double dt)
     E1.setName("E1");
     E2.setName("E2");
     scale1.setName("scale1");
-    qdMax.setName("qdMax1");
+    qdMax1.setName("qdMax1");
     i1.setName("i1");
     kM1.setName("kM1");
     M1.setName("M1");
 
     // Name all signals
-    E1.getOut().getSignal()setName("Position encoder1 [rad]");
+    E1.getOut().getSignal().setName("Position encoder1 [rad]");
     E2.getOut().getSignal().setName("Position encoder 2 [rad]");
     scale1.getOut().getSignal().setName("Output shaft velocity setpoint 1 [rad/s]");
     qdMax1.getOut().getSignal().setName("Saturated output shaft velocity setpoint 1 [rad/s]");

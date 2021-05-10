@@ -62,13 +62,13 @@ MyRobotSafetyProperties::MyRobotSafetyProperties(ControlSystem &cs, double dt)
     slMotorPowerOn.addEvent(startMoving,slSystemMoving, kPublicEvent);
     slMotorPowerOn.addEvent(powerOff, slSystemOn, kPublicEvent);
     slSystemMoving.addEvent(stopMoving, slMotorPowerOn, kPublicEvent);
-    slSystemMOving.addEvent(emergency, slEmergencyBraking, kPublicEvent);
-    slSystemMoving.addEvent(abor, slHalting, kPublicEvent);
+    slSystemMoving.addEvent(emergency, slEmergencyBraking, kPublicEvent);
+    slSystemMoving.addEvent(abort, slHalting, kPublicEvent);
 
     // Add events to multiple safety levels
     // addEventToAllLevelsBetween(lowerLevel, upperLevel, event, targetLevel, kPublicEvent/kPrivateEvent);
-    addEventToAllLevelBetween(slEmergency, slMotorPowerOn, abort, slShuttingDown, kPublicEvent);
-    addEventToAllLevelBetween(slSystemOn, slMotorPowerOn, emergency, slEmergency, kPublicEvent);
+    addEventToAllLevelsBetween(slEmergency, slMotorPowerOn, abort, slShuttingDown, kPublicEvent);
+    addEventToAllLevelsBetween(slSystemOn, slMotorPowerOn, emergency, slEmergency, kPublicEvent);
 
 
     // Define input states and events for all levels
