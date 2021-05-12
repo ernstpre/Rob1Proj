@@ -104,7 +104,7 @@ MyRobotSafetyProperties::MyRobotSafetyProperties(ControlSystem &cs, double dt)
 
     slEmergency.setLevelAction([&](SafetyContext *privateContext) {
         
-        if (slEmergency.getNofActivations()*dt ==1) // wait 1 sec
+        if (slEmergency.getNofActivations()*dt == 1) // wait 1 sec
         {
             static int counter = 0;
             if (counter++ == 3) privateContext->triggerEvent(abort); //abort after entering emergency sequence 4 times
