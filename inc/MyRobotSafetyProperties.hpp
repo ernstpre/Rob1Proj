@@ -39,9 +39,12 @@ public:
 private:
     // Define all critical outputs
     // eeros::hal::Output<bool>* ...;
+    eeros::hal::Output<bool>* redLed;
+    eeros::hal::Output<bool>* greenLed;
 
     // Define all critical inputs
     // eeros::hal::Input<bool>* ...;
+    eeros::hal::Input<bool>* readyButton;
 
     ControlSystem &cs;
 };
