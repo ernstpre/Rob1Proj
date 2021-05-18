@@ -49,8 +49,8 @@ ControlSystem::ControlSystem(double dt)
     // Name all signals
     E1.getOut().getSignal().setName("Position encoder1 [rad]");
     E2.getOut().getSignal().setName("Position encoder 2 [rad]");
-    controller1.getOut().getSignal.setName("Output shaft torque setpoint 1 [Nm]");
-    controller2.getOut().getSignal.setName("Output shaft torque setpoint 2 [Nm]");
+    controller1.getOut(0).getSignal().setName("Output shaft torque setpoint 1 [Nm]");
+    controller2.getOut(0).getSignal().setName("Output shaft torque setpoint 2 [Nm]");
     QMax1.getOut().getSignal().setName("Saturated output shaft torque setopint 1 [Nm]");
     QMax2.getOut().getSignal().setName("Saturated output shaft torque setopint 2 [Nm]");
     qdMax1.getOut().getSignal().setName("Saturated output shaft velocity setpoint 1 [rad/s]");
@@ -74,7 +74,7 @@ ControlSystem::ControlSystem(double dt)
     // Connect signals
     controller1.getIn(0).connect(E2.getOut());
     controller1.getIn(1).connect(E1.getOut());
-    QMax1.getIn().connect(controller1.getOut());
+    QMax1.getIn().connect(controller1.getOut(0));
     i1_inv.getIn().connect(QMax1.getOut());
     kM1_inv.getIn().connect(i1_inv.getOut());
     R1.getIn().connect(kM1_inv.getOut());
