@@ -21,7 +21,7 @@ public:
     }
 
     PDController(double f_task, double D, double s, double M)
-        : Kp(f_task / s / D * f_task / s / D), Kd(2.0 * F-task / s), M(M)
+        : Kp(f_task / s / D * f_task / s / D), Kd(2.0 * f_task / s), M(M)
         {
             init();
         }
@@ -39,7 +39,7 @@ public:
     {
         if (index == 0)
             return M.getOut();
-        elseif (index == 1)
+        else if (index == 1)
             return d2.getOut();
         else
             return eeros::Fault("index out of bounds in block '" + this->getName() + "'");

@@ -4,7 +4,7 @@ ControlSystem::ControlSystem(double dt)
     : E1("enc1"), E2("enc2"),
       controller1(1.0 / dt, 0.7, 4.4, 6.8e-8 * 3441.0 / 104.0 * 3441.1 / 104.0),
       controller2(1.0 / dt, 0.7, 4.4, 6.8e-8 * 3441.0 / 104.0 * 3441.1 / 104.0),
-      Qmax1(0.1), QMax2(0.1),
+      QMax1(0.1), QMax2(0.1),
       qdMax1(21.3), qdMax2(21.3),
       i1(3441.0 / 104.0),
       i2(3441.0 / 104.0),
@@ -17,7 +17,7 @@ ControlSystem::ControlSystem(double dt)
       R1(8.0),
       R2(8.0),
       M1("motor1"),
-      M2("motor2")
+      M2("motor2"),
       timedomain("Main time domain", dt, true)
 {
     // Name all blocks
@@ -49,7 +49,7 @@ ControlSystem::ControlSystem(double dt)
     // Name all signals
     E1.getOut().getSignal().setName("Position encoder1 [rad]");
     E2.getOut().getSignal().setName("Position encoder 2 [rad]");
-    controller2.getOut().getSignal.setName("Output shaft torque setpoint 1 [Nm]");
+    controller1.getOut().getSignal.setName("Output shaft torque setpoint 1 [Nm]");
     controller2.getOut().getSignal.setName("Output shaft torque setpoint 2 [Nm]");
     QMax1.getOut().getSignal().setName("Saturated output shaft torque setopint 1 [Nm]");
     QMax2.getOut().getSignal().setName("Saturated output shaft torque setopint 2 [Nm]");
@@ -85,7 +85,7 @@ ControlSystem::ControlSystem(double dt)
     kM1.getIn().connect(i1.getOut());
 
     U1.getIn(0).connect(R1.getOut());
-    U1.getIn(1).connect(kM1.get)
+    U1.getIn(1).connect(kM1.getOut());
     M1.getIn().connect(U1.getOut());
 
     // Add blocks to timedomain
