@@ -10,6 +10,7 @@
 #include <eeros/control/Saturation.hpp>
 #include <eeros/control/Sum.hpp>
 #include <eeros/control/PeripheralOutput.hpp>
+#include <eeros/control/Constant.hpp>
 
 using namespace eeros::control;
 
@@ -19,12 +20,13 @@ public:
     ControlSystem(double dt);
 
     // Define Blocks
-    PeripheralInput<> E1,E2 Ewl, Ewr;
+    PeripheralInput<> E1,E2;
+    Constant<> myConstant;
     PDController<> controller1, controller2;
     D<> d1, d2;
     Gain<> i1, i2, i1_inv, i2_inv, kM1, kM2, kM1_inv, kM2_inv, R1, R2;
     Saturation<> qdMax1, qdMax2, QMax1, QMax2;
-    PeripheralOutput<> M1, M2, Mwl, Mwr;
+    PeripheralOutput<> M1, M2;
     Sum<> U1, U2;
     
     TimeDomain timedomain;
