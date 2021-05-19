@@ -42,7 +42,7 @@ public:
         else if (index == 1)
             return d2.getOut();
         else
-            return eeros::Fault("index out of bounds in block '" + this->getName() + "'");
+            throw eeros::Fault("index out of bounds in block '" + this->getName() + "'");
     }
         
 

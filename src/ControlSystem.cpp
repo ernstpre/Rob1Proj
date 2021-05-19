@@ -69,6 +69,8 @@ ControlSystem::ControlSystem(double dt)
     d2.getOut().getSignal().setName("Output shaft velocity setpoint 2 [rad/s]");
     U1.getOut().getSignal().setName("Motor 1 setpoint voltage [V]");
     U2.getOut().getSignal().setName("Motor 2 setpoint voltage [V]");
+    M1.setName("voltage motor left wheel [V]");
+    M2.setName("voltage motor right wheel [V]");
 
 
     // Connect signals
