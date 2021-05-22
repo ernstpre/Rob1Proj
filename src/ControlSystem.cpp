@@ -2,6 +2,7 @@
 
 ControlSystem::ControlSystem(double dt)
     : E1("enc1"), E2("enc2"),
+      myConstant(1.0),
       controller1(1.0 / dt, 0.7, 4.4, 6.8e-8 * 3441.0 / 104.0 * 3441.1 / 104.0),
       controller2(1.0 / dt, 0.7, 4.4, 6.8e-8 * 3441.0 / 104.0 * 3441.1 / 104.0),
       QMax1(0.1), QMax2(0.1),
@@ -97,6 +98,9 @@ ControlSystem::ControlSystem(double dt)
     // Add blocks to timedomain
     timedomain.addBlock(E1);
     timedomain.addBlock(E2);
+    timedomain.addBlock(myConstant);
+    timedomain.addBlock(M1);
+    timedomain.addBlock(M2);
     // timedomain.addBlock(E1);
     // timedomain.addBlock(E2);
     // timedomain.addBlock(controller1);
