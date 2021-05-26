@@ -2,7 +2,13 @@
 
 ControlSystem::ControlSystem(double dt)
     : E1("enc1"), E2("enc2"),
-      myConstant(1.0),
+      myConstant(0.2), myConstant2(0.0),
+      InvMotMod(AMRSC::MOT::QMax, AMRSC::MOT::qdMax, AMRSC::MOT::i, AMRSC::MOT::kM, AMRSC::MOT::R),
+      PIController(1.0 / dt, AMRSC::CONT::D, AMRSC::CONT::s, AMRSC::CONT::M, AMRSC::CONT::ILIMIT),
+      M1("motor1"),
+      M2("motor2"),
+      timedomain("Main time domain", dt, true),
+      
       controller1(1.0 / dt, 0.7, 4.4, 6.8e-8 * 3441.0 / 104.0 * 3441.1 / 104.0),
       controller2(1.0 / dt, 0.7, 4.4, 6.8e-8 * 3441.0 / 104.0 * 3441.1 / 104.0),
       QMax1(0.1), QMax2(0.1),
@@ -16,15 +22,20 @@ ControlSystem::ControlSystem(double dt)
       kM1_inv(1 / 8.44e-3),
       kM2_inv(1 / 8.44e-3),
       R1(8.0),
-      R2(8.0),
-      M1("motor1"),
-      M2("motor2"),
-      timedomain("Main time domain", dt, true)
+      R2(8.0)
+      
 {
     // Name all blocks
     E1.setName("E1");
     E2.setName("E2");
+    d1.setName("d1");
+    d2.setName("d2");
     myConstant.setName("My constant");
+    PIController.setName("PI Controller");
+    InvMotMod.setName("InvMotMod");
+    M1.setName("M1");
+    M2.setName("M2");
+
     controller1.setName("controller1");
     controller2.setName("controller2");
     QMax1.setName("QMax1");
@@ -41,12 +52,8 @@ ControlSystem::ControlSystem(double dt)
     kM2_inv.setName("kM2_inv");
     R1.setName("R1");
     R2.setName("R2");
-    d1.setName("d1");
-    d2.setName("d2");
     U1.setName("U1");
     U2.setName("U2");
-    M1.setName("M1");
-    M2.setName("M2");
 
     // Name all signals
     // E1.getOut().getSignal().setName("Position encoder1 [m]");
@@ -73,12 +80,17 @@ ControlSystem::ControlSystem(double dt)
     // U2.getOut().getSignal().setName("Motor 2 setpoint voltage [V]");
     E1.getOut().getSignal().setName("Position encoder1 [m]");
     E2.getOut().getSignal().setName("Position encoder2 [m]");
-    myConstant.getOut().getSignal().setName("My constant value");
-
-
+    myConstant.getOut().getSignal().setName("Right motor voltage [V]");
+    
     // Connect signals
-    M1.getIn().connect(myConstant.getOut());
-    M2.getIn().connect(myConstant.getOut());
+    d1.getIn().connect(E1.getOut());
+    PIController.getInqds().connect(myConstant.getOut());
+    PIController.getInqd().connect(d1.getOut());
+    InvMotMod.getInQ().connect(PIController.getOutQ());
+    InvMotMod.getInqd().connect(PIController.getOutqd());
+    M1.getIn().connect(InvMotMod.getOutU());
+    M2.getIn().connect(InvMotMod.getOutU());
+    
     // controller1.getIn(0).connect(E2.getOut());
     // controller1.getIn(1).connect(E1.getOut());
     // QMax1.getIn().connect(controller1.getOut(0));
@@ -98,9 +110,15 @@ ControlSystem::ControlSystem(double dt)
     // Add blocks to timedomain
     timedomain.addBlock(E1);
     timedomain.addBlock(E2);
+    timedomain.addBlock(d1);
     timedomain.addBlock(myConstant);
+    timedomain.addBlock(myConstant2);
+    timedomain.addBlock(PIController);
+    timedomain.addBlock(InvMotMod);
     timedomain.addBlock(M1);
     timedomain.addBlock(M2);
+   
+
     // timedomain.addBlock(E1);
     // timedomain.addBlock(E2);
     // timedomain.addBlock(controller1);
