@@ -48,7 +48,7 @@ public:
         Kp.run();
         e.run();
         KI.run();
-        qddc.run();
+        qddC.run();
         M.run();
     }
 
@@ -82,7 +82,7 @@ private:
         M.getOut().getSignal().setName("Wheel force setpoint [N]");
          // Connect Signals
         ed.negateInput(1);
-        ed.getIn(1)connect(qd.getOut());
+        ed.getIn(1).connect(qd.getOut());
         Kp.getIn().connect(ed.getOut());
         e.getIn().connect(ed.getOut());
         e.setInitCondition(0.0);
