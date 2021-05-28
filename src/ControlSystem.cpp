@@ -3,8 +3,8 @@
 ControlSystem::ControlSystem(double dt)
     : E1("enc1"), E2("enc2"),
       myConstant(0.2), myConstant2(0.0),
-      InvMotMod(AMRSC::MOT::QMax, AMRSC::MOT::qdMax, AMRSC::MOT::i, AMRSC::MOT::kM, AMRSC::MOT::R),
-      PIController(1.0 / dt, AMRSC::CONT::D, AMRSC::CONT::s, AMRSC::CONT::M, AMRSC::CONT::ILIMIT),
+      invMotMod(AMRSC::MOT::QMax, AMRSC::MOT::qdMax, AMRSC::MOT::i, AMRSC::MOT::kM, AMRSC::MOT::R),
+      piController(1.0 / dt, AMRSC::CONT::D, AMRSC::CONT::s, AMRSC::CONT::M, AMRSC::CONT::ILIMIT),
       M1("motor1"),
       M2("motor2"),
       timedomain("Main time domain", dt, true),
@@ -31,8 +31,8 @@ ControlSystem::ControlSystem(double dt)
     d1.setName("d1");
     d2.setName("d2");
     myConstant.setName("My constant");
-    PIController.setName("PI Controller");
-    InvMotMod.setName("InvMotMod");
+    piController.setName("PI Controller");
+    invMotMod.setName("InvMotMod");
     M1.setName("M1");
     M2.setName("M2");
 
@@ -84,12 +84,12 @@ ControlSystem::ControlSystem(double dt)
     
     // Connect signals
     d1.getIn().connect(E1.getOut());
-    PIController.getInqds().connect(myConstant.getOut());
-    PIController.getInqd().connect(d1.getOut());
-    InvMotMod.getInQ().connect(PIController.getOutQ());
-    InvMotMod.getInqd().connect(PIController.getOutqd());
-    M1.getIn().connect(InvMotMod.getOutU());
-    M2.getIn().connect(InvMotMod.getOutU());
+    piController.getInqds().connect(myConstant.getOut());
+    piController.getInqd().connect(d1.getOut());
+    invMotMod.getInQ().connect(piController.getOutQ());
+    invMotMod.getInqd().connect(piController.getOutqd());
+    M1.getIn().connect(invMotMod.getOutU());
+    M2.getIn().connect(invMotMod.getOutU());
     
     // controller1.getIn(0).connect(E2.getOut());
     // controller1.getIn(1).connect(E1.getOut());
@@ -113,8 +113,8 @@ ControlSystem::ControlSystem(double dt)
     timedomain.addBlock(d1);
     timedomain.addBlock(myConstant);
     timedomain.addBlock(myConstant2);
-    timedomain.addBlock(PIController);
-    timedomain.addBlock(InvMotMod);
+    timedomain.addBlock(piController);
+    timedomain.addBlock(invMotMod);
     timedomain.addBlock(M1);
     timedomain.addBlock(M2);
    

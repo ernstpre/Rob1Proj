@@ -7,9 +7,7 @@
 #include "MyRobotSafetyProperties.hpp"
 #include "ControlSystem.hpp"
 #include <eeros/sequencer/Wait.hpp>
-#include "customBlocks/InvMotMod.hpp"
-#include "customBlocks/PIController.hpp"
-#include "AMRSConstants.hpp"
+
 
 class MainSequence : public eeros::sequencer::Sequence
 {
@@ -31,12 +29,12 @@ public:
     {
         while (eeros::sequencer::Sequencer::running && ss.getCurrentLevel() < sp.slSystemOn)
             ;  // wait for ss to get into slsystemOn
-            cs.PIController.enableIntegator();
+            cs.piController.enableIntegator();
         while (eeros::sequencer::Sequencer::running)
         {
-            log.info() << cs.PIController.getOutQ().getSignal();
-            log.info() << cs.PIController.getOutqd().getSignal();
-            log.info() << cs.InvMotMod.getOutU().getSignal();
+            log.info() << cs.piController.getOutQ().getSignal();
+            log.info() << cs.piController.getOutqd().getSignal();
+            log.info() << cs.invMotMod.getOutU().getSignal();
             sleep(1.0);
         }
         return 0;

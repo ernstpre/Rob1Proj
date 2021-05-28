@@ -27,8 +27,8 @@ public:
     PeripheralInput<> E1,E2;
     Constant<> myConstant, myConstant2;
     PDController<> controller1, controller2;
-    PIController<> PIController;
-    InvMotMod<> InvMotMod;
+    PIController<> piController;
+    InvMotMod<> invMotMod;
     D<> d1, d2;
     Gain<> i1, i2, i1_inv, i2_inv, kM1, kM2, kM1_inv, kM2_inv, R1, R2;
     Saturation<> qdMax1, qdMax2, QMax1, QMax2;
