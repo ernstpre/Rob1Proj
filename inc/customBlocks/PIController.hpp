@@ -24,11 +24,11 @@ public:
     }
     // Constructor for asymmetric limits
     PIController(double f_Task, double D, double s, double M, double IUpperLimit, double ILowerLimit)
-    : Kp(f_Task / s),
+        : Kp(f_Task / s),
           KI(f_Task / 2.0 / s / D * f_Task / 2.0 / s / D),
           M(M)
     {
-        init(ILimit, -ILimit);
+        init(IUpperLimit, -ILowerLimit);
     }
 
 
@@ -93,8 +93,6 @@ private:
         this->M.getIn().connect(qddC.getOut());
 
     }
-    
-    
 };
 
-#endif //CUSTOMBLOCKTEMPLATE_HPP_
+#endif //PIController_HPP_

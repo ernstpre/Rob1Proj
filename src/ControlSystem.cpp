@@ -36,48 +36,9 @@ ControlSystem::ControlSystem(double dt)
     M1.setName("M1");
     M2.setName("M2");
 
-    controller1.setName("controller1");
-    controller2.setName("controller2");
-    QMax1.setName("QMax1");
-    QMax2.setName("QMax2");
-    qdMax1.setName("qdMax1");
-    qdMax2.setName("qdMax2");
-    i1.setName("i1");
-    i2.setName("i2");
-    i1_inv.setName("i1_inv");
-    i2_inv.setName("i2_inv");
-    kM1.setName("kM1");
-    kM2.setName("kM2");
-    kM1_inv.setName("kM1_inv");
-    kM2_inv.setName("kM2_inv");
-    R1.setName("R1");
-    R2.setName("R2");
-    U1.setName("U1");
-    U2.setName("U2");
 
     // Name all signals
-    // E1.getOut().getSignal().setName("Position encoder1 [m]");
-    // E2.getOut().getSignal().setName("Position encoder 2 [m]");
-    // controller1.getOut(0).getSignal().setName("Output shaft torque setpoint 1 [Nm]");
-    // controller2.getOut(0).getSignal().setName("Output shaft torque setpoint 2 [Nm]");
-    // QMax1.getOut().getSignal().setName("Saturated output shaft torque setopint 1 [Nm]");
-    // QMax2.getOut().getSignal().setName("Saturated output shaft torque setopint 2 [Nm]");
-    // qdMax1.getOut().getSignal().setName("Saturated output shaft velocity setpoint 1 [rad/s]");
-    // qdMax2.getOut().getSignal().setName("Saturated output shaft velocity setpoint 2 [rad/s]");
-    // i1.getOut().getSignal().setName("Motor 1 velocity setpoint [rad/s]");
-    // i2.getOut().getSignal().setName("Motor 2 velocity setpoint [rad/s]");
-    // i1_inv.getOut().getSignal().setName("Motor 1 torque setpoint [Nm]");
-    // i2_inv.getOut().getSignal().setName("Motor 2 torque setpoint [Nm]");
-    // kM1.getOut().getSignal().setName("Motor 1 setpoint voltage [V]");
-    // kM2.getOut().getSignal().setName("Motor 2 setpoint voltage [V]");
-    // kM1_inv.getOut().getSignal().setName("Motor 1 setpoint current [A]");
-    // kM2_inv.getOut().getSignal().setName("Motor 2 setpoint current [A]");
-    // R1.getOut().getSignal().setName("Motor 1 setpoint voltage from pd controller [V]");
-    // R2.getOut().getSignal().setName("Motor 2 setpoint voltage from pd controller [V]");
-    // d1.getOut().getSignal().setName("Output shaft velocity setpoint 1 [rad/s]");
-    // d2.getOut().getSignal().setName("Output shaft velocity setpoint 2 [rad/s]");
-    // U1.getOut().getSignal().setName("Motor 1 setpoint voltage [V]");
-    // U2.getOut().getSignal().setName("Motor 2 setpoint voltage [V]");
+   
     E1.getOut().getSignal().setName("Position encoder1 [m]");
     E2.getOut().getSignal().setName("Position encoder2 [m]");
     myConstant.getOut().getSignal().setName("Right motor voltage [V]");
